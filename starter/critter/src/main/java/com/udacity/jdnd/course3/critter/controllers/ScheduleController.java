@@ -1,10 +1,6 @@
 package com.udacity.jdnd.course3.critter.controllers;
 
-import com.udacity.jdnd.course3.critter.dto.CustomerDTO;
-import com.udacity.jdnd.course3.critter.dto.PetDTO;
 import com.udacity.jdnd.course3.critter.dto.ScheduleDTO;
-import com.udacity.jdnd.course3.critter.entities.CustomerEntity;
-import com.udacity.jdnd.course3.critter.entities.PetEntity;
 import com.udacity.jdnd.course3.critter.entities.ScheduleEntity;
 import com.udacity.jdnd.course3.critter.services.impls.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +37,7 @@ public class ScheduleController {
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
-        List<ScheduleEntity> entities = scheduleService.findByPet(petId);
+        List<ScheduleEntity> entities = scheduleService.findByPets(petId);
         List<ScheduleDTO> dtos = new ArrayList<>();
         for (ScheduleEntity entity : entities) {
             dtos.add(entity.convertToScheduleDTO(entity));
@@ -51,7 +47,7 @@ public class ScheduleController {
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
-        List<ScheduleEntity> entities = scheduleService.findByEmployee(employeeId);
+        List<ScheduleEntity> entities = scheduleService.findByEmployees(employeeId);
         List<ScheduleDTO> dtos = new ArrayList<>();
         for (ScheduleEntity entity : entities) {
             dtos.add(entity.convertToScheduleDTO(entity));

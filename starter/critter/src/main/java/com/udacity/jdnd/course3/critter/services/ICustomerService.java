@@ -14,4 +14,6 @@ public interface ICustomerService {
     CustomerEntity add(CustomerDTO dto);
 
     CustomerEntity findByPet(PetEntity petEntity);
+
+    CustomerEntity findByPetId(Long petId);
 }

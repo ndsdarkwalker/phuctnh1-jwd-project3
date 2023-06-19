@@ -1,11 +1,8 @@
 package com.udacity.jdnd.course3.critter.controllers;
 
-import com.udacity.jdnd.course3.critter.dto.CustomerDTO;
 import com.udacity.jdnd.course3.critter.dto.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.dto.EmployeeRequestDTO;
-import com.udacity.jdnd.course3.critter.entities.CustomerEntity;
 import com.udacity.jdnd.course3.critter.entities.EmployeeEntity;
-import com.udacity.jdnd.course3.critter.entities.EmployeeRequestEntity;
 import com.udacity.jdnd.course3.critter.services.impls.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +11,7 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 public class EmployeeController {

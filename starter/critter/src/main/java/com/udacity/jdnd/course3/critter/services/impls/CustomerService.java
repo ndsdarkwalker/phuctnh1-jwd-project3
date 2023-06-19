@@ -65,4 +65,9 @@ public class CustomerService implements ICustomerService {
         entity.setPhoneNumber(dto.getPhoneNumber());
         return customerRepository.save(entity);
     }
+
+    @Override
+    public CustomerEntity findByPetId(Long petId) {
+        return petRepository.getOne(petId).getCustomer();
+    }
 }

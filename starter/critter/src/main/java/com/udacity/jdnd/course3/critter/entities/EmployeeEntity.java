@@ -4,17 +4,13 @@ import com.udacity.jdnd.course3.critter.dto.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.enums.EmployeeSkill;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.util.Set;
 
 @Data
 @Table(name = "employees")
+@Entity
 public class EmployeeEntity {
 
     @Id

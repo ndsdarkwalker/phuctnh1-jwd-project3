@@ -16,7 +16,7 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> 
     @Query("SELECT p FROM PetEntity p WHERE p.customer.id = :customerId")
     PetEntity findPetByCustomer(@Param("customerId") Long customerId);
 
-    List<ScheduleEntity> findByPet(PetEntity pet);
+    List<ScheduleEntity> findByPets(PetEntity pet);
 
-    List<ScheduleEntity> findByEmploye(EmployeeEntity employee);
+    List<ScheduleEntity> findByEmployees(EmployeeEntity employee);
 }

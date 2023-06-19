@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,17 +39,24 @@ public class ScheduleService implements IScheduleService {
 
     @Override
     public List<ScheduleEntity> findByCustomer(Long id) {
-        return null;
+        List<PetEntity> pets = petRepository.findByOwner(id);
+        List<ScheduleEntity> listEntity = new ArrayList<>();
+        for (PetEntity pet : pets) {
+            listEntity.addAll(scheduleRepository.findByPets(pet));
+        }
+        return listEntity;
     }
 
     @Override
-    public List<ScheduleEntity> findByPet(Long id) {
-        return null;
+    public List<ScheduleEntity> findByPets(Long id) {
+        return scheduleRepository.findByPets(petRepository.getOne(id));
     }
 
     @Override
-    public List<ScheduleEntity> findByEmployee(Long id) {
-        return null;
+    public List<ScheduleEntity> findByEmployees(Long id) {
+        List<ScheduleEntity> entities = scheduleRepository.findByEmployees(
+                employeeRepository.getOne(id));
+        return entities;
     }
 
     @Override

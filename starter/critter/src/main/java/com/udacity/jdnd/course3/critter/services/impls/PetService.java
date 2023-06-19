@@ -46,7 +46,12 @@ public class PetService implements IPetService {
         entity.setType(dto.getType());
         entity.setNotes(dto.getNotes());
         entity.setOwnerId(customer.getId());
-        return petRepository.save(entity);
+
+        entity.setCustomer(customer);
+        entity = petRepository.save(entity);
+        customer.getPetList().add(entity);
+        customerRepository.save(customer);
+        return entity;
     }
 
     @Override

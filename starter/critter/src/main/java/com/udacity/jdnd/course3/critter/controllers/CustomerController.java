@@ -2,10 +2,8 @@ package com.udacity.jdnd.course3.critter.controllers;
 
 import com.udacity.jdnd.course3.critter.dto.CustomerDTO;
 import com.udacity.jdnd.course3.critter.dto.EmployeeDTO;
-import com.udacity.jdnd.course3.critter.dto.EmployeeRequestDTO;
 import com.udacity.jdnd.course3.critter.entities.CustomerEntity;
 import com.udacity.jdnd.course3.critter.entities.EmployeeEntity;
-import com.udacity.jdnd.course3.critter.entities.EmployeeRequestEntity;
 import com.udacity.jdnd.course3.critter.entities.PetEntity;
 import com.udacity.jdnd.course3.critter.services.impls.CustomerService;
 import com.udacity.jdnd.course3.critter.services.impls.EmployeeService;
@@ -17,8 +15,9 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 @RestController
-@RequestMapping("/user")
+@RequestMapping(path = "/user")
 public class CustomerController {
 
     @Autowired
@@ -48,8 +47,13 @@ public class CustomerController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId) {
-        PetEntity petEntity = petService.findById(petId);
-        CustomerEntity customerEntity = customerService.findByPet(petEntity);
+//        PetEntity petEntity = petService.findById(petId);
+//        CustomerEntity customerEntity = customerService.findByPet(petEntity);
+//        if (customerEntity != null) {
+//            return customerEntity.convertToCustomerDTO(customerEntity);
+//        }
+//        return new CustomerDTO();
+        CustomerEntity customerEntity = customerService.findByPetId(petId);
         return customerEntity.convertToCustomerDTO(customerEntity);
     }
 
@@ -71,15 +75,5 @@ public class CustomerController {
         EmployeeDTO dto = entity.convertToEmployeeDTO(entity);
         dto.setDaysAvailable(daysAvailable);
         employeeService.add(dto);
-    }
-
-    @GetMapping("/employee/availability")
-    public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        List<EmployeeEntity> entities = employeeService.findByAvailability(employeeDTO.getSkills(), employeeDTO.getDate());
-        List<EmployeeDTO> dtos = new ArrayList<>();
-        for (EmployeeEntity entity : entities) {
-            dtos.add(entity.convertToEmployeeDTO(entity));
-        }
-        return dtos;
     }
 }
